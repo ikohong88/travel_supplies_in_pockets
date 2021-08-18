@@ -18,7 +18,8 @@
 
 - ### OPEN API 주소 :
   - 날씨 데이터 :
-  - 관광데이터 :
+  - 생활기상지수 데이터 : http://apis.data.go.kr/1360000/LivingWthrIdxServiceV2 (기상청)
+  - 관광데이터 : 
   - 철도데이터 :
   - 버스데이터 :
   - 도로교통상황 : 
