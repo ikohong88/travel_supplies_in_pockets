@@ -24,7 +24,7 @@
   - 버스데이터 :
   - 도로교통상황 : 
   - 관광지 주변 명소 및 숙박 데이터 :
-  - 한국관광공사 관광사진 정보 데이터 :
+  - 한국관광공사 관광사진 정보 데이터 : http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService
 
 - ### 서비스 환경 
   - PC, 모바일 (반응형 웹 개발)
