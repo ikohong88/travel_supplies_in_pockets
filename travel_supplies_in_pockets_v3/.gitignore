@@ -4,7 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-serviceKey.js
+ServiceKey.jsp
 ServiceKey.java
 
 ### STS ###
