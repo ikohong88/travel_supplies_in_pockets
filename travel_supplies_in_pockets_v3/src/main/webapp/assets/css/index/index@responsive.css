@@ -1,0 +1,47 @@
+@media screen and (max-width:970px) {
+    .container {position: relative; overflow: hidden;
+    width: 100vw; height: 100vh;}
+    .container > div {
+        width: 100%; height: 100%;
+        box-sizing: border-box;
+        float: none;
+    }
+    .container > .left {
+        width: 90%;
+        height: 90%;
+        position: relative;
+        left: 3%;
+        top: 3%;
+        border-radius: 10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.7);
+        box-sizing: border-box;
+    }
+    .container {
+        background-size: auto 920px;
+    }
+    .right {
+        display: none;
+    }
+    .left_contents > h1 {
+        font-size: 6vw;
+        letter-spacing: 0;
+    }
+    .left_contents > h2 {
+        font-size: 5.5vw; margin-bottom: 5vh;
+    }
+    .left_contents > h3 {
+        font-size: 3.8vw;
+    }
+    .select_box select{
+        font-size: 3.5vw;
+    }
+    .select_box_region select {
+        font-size: 3.5vw;
+    }
+    #ready {
+        font-size: 3.5vw;
+    }
+    #noplan a {
+        font-size: 2.8vw;
+    }
+}
