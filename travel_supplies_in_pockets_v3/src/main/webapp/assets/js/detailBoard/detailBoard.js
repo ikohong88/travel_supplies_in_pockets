@@ -1161,7 +1161,7 @@ window.onload = $(function() {
                     let format_sethour= (`${set_hour >= 10 ? set_hour : '0' + set_hour}`);
                     chart_hour.push(format_sethour+" 시");
                     let hour = (format_sethour)+"00";
-                    console.log(format_setDate+" | "+hour);
+                    // console.log(format_setDate+" | "+hour);
                     for(let j=0; j < weather.data.length; j++) {
                         let fcstTime = weather.data[j].fcstTime;
                         let fcstDate = weather.data[j].fcstDate;
@@ -1170,7 +1170,6 @@ window.onload = $(function() {
                             if(cat == "TMP") {
                                 TMP = weather.data[j].fcstValue;
                                 chart_TMP.push(TMP);
-                                console.log(TMP);
                             }
                             else if(cat == "UUU") {
                                 UUU = weather.data[j].fcstValue;
@@ -1299,35 +1298,42 @@ window.onload = $(function() {
                 for(let j = 0; j<chart_PCP.length; j++) {
                     if(chart_PCP[j] != "강수없음") {
                         PCP_tag = 
-                        '<td id="PCP_Time">'+chart_hour[j]+' 시</td>'+
-                        '<td id="PCP_Info">'+chart_PCP[j]+'</td>'
+                        '<tr>'+
+                            '<td class="PCP_Time">'+chart_hour[j]+'</td>'+
+                            '<td class="PCP_Info">'+chart_PCP[j]+'</td>'+
+                        '</tr>'
                         $("#PCP_POPInfo").append(PCP_tag);
-                    } 
-                    if(j = (chart_PCP.length-1)) {
-                        if(chart_PCP[j] == "강수없음") {
-                        PCP_tag = 
-                        '<td id="PCP_Info" colspan="2">12시간동안 강수 예정 없음</td>'
-                        $("#PCP_POPInfo").append(PCP_tag);
-                        } 
+                    }
+                    if($(".PCP_Time").length == 0) {
+                        if(j = (chart_PCP.length-1)) {
+                            if(chart_PCP[j] == "강수없음") {
+                            PCP_tag = 
+                            '<td id="PCP_Info" colspan="2">12시간동안 강수 예정 없음</td>'
+                            $("#PCP_POPInfo").append(PCP_tag);
+                            } 
+                        }
                     }
                 }
 
                 let SKY_tag;
                 let Time_tag;
                 for(let i = 0; i<chart_SKY.length; i++) {
-                    Time_tag = '<th>'+chart_hour[i]+'</th>'
-                    $("#SKYNowHour").append(Time_tag);
+                    Time_tag = '<th>'+chart_hour[i]+'</th>';
                     if(chart_SKY[i] == "1") {
-                        SKY_tag = "<td>맑음</td>"
-                        $("#SKY_Info").append(SKY_tag);
+                        SKY_tag = "<td>맑음</td>";
                     }
                     if(chart_SKY[i] == "3") {
-                        SKY_tag = "<td>구름많음</td>"
-                        $("#SKY_Info").append(SKY_tag);
+                        SKY_tag = "<td>구름많음</td>";
                     }
                     if(chart_SKY[i] == "4") {
-                        SKY_tag = "<td>흐림</td>"
-                        $("#SKY_Info").append(SKY_tag);
+                        SKY_tag = "<td>흐림</td>";
+                    }
+                    if(i < 6) {
+                        $("#SKYNowHour1").append(Time_tag);
+                        $("#SKY_Info1").append(SKY_tag);
+                    } else {
+                        $("#SKYNowHour2").append(Time_tag);
+                        $("#SKY_Info2").append(SKY_tag);
                     }
                 }
                 // window.weather_Chart.destroy();

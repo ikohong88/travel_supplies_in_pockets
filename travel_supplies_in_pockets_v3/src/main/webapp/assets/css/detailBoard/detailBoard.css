@@ -61,3 +61,9 @@ box-sizing: border-box; padding-left: 50px;}
 .text_info > h1 {font-size: 60px; font-weight: 700; text-align: center;}
 .text_info > h2 {font-size: 30px; font-weight: 500; text-align: center;}
 .weatherTextArea > .text_info {display: inline-block; vertical-align: top;}
+
+#PCP_Table {width: 44%; display: inline-block; vertical-align: top;}
+#PCP_Table > table {width: 100%; display: inline-block; vertical-align: top;}
+#POP_TextInfo {display: inline-block; vertical-align: top;}
+#POP_TextInfo > h1 {font-size: 60px; font-weight: 700; text-align: center;}
+#POP_TextInfo > h2 {font-size: 30px; font-weight: 500; text-align: center;}

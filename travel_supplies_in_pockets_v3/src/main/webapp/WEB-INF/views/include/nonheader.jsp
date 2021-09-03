@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="/assets/css/fonts.css">
     <link rel="stylesheet" href="/assets/css/header/header.css">
 
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
+
     <script src="/assets/js/header/nonheader.js"></script>
 </head>
 <body>
@@ -72,7 +76,7 @@
                     
                 </select>
                 <select id="header_gubun">
-                    <!-- <option class="gubun" value="none">시도를 먼저 선택해주세요.</option> -->
+                    <option class="header_gubun" value="none">시도를 먼저 선택해주세요.</option>
                 </select>
             </div>
             <div class="setting_row">
@@ -89,7 +93,6 @@
         </div>
         <div class="setting_btns">
             <button id="change_option">변경</button>
-            <button id="no_option">옵션없이 준비하기</button>
         </div>
     </div>
 </body>

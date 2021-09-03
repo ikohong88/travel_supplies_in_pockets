@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주머니속 여행준비물</title>
     <style>
         .map_wrap {position:relative;width:600px;height:710px;}
         .title {font-weight:bold;display:block;}
@@ -159,32 +158,39 @@
                                     <h1 id="WSD_average"></h1>
                                 </div>
                             </div>   
-                            <div class="weatherTextArea">
+                            <div class="weatherPCP_POPArea">
                                 <h2>강수 정보</h2>
-                                <table>
-                                    <thead>
-                                        <th>12시간 평균 강수확률</th>
-                                        <th>강수 예정 시간</th>
-                                        <th>강수 예정</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr id="PCP_POPInfo">
-                                            <td id="POP_Info"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div id="PCP_Table">
+                                    <table>
+                                        <thead>
+                                            <th>강수 예정 시간</th>
+                                            <th>강수 예정</th>
+                                        </thead>
+                                        <tbody id="PCP_POPInfo">
+                                        
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="POP_TextInfo">
+                                    <h2>12시간 평균 강수확률</h2>
+                                    <h1 id="POP_Info"></h1>
+                                </div>
                             </div>               
                             <div class="weatherTableArea">
                                 <h2>하늘상태</h2>
                                 <table>
-                                    <thead id="SKYNowHour">
+                                    <tr id="SKYNowHour1">
+                                        
+                                    </tr>
+                                    <tr id="SKY_Info1">
 
-                                    </thead>
-                                    <tbody id="SKY_Info">
-                                        <tr id="SKY_Info">
+                                    </tr>
+                                    <tr id="SKYNowHour2">
 
-                                        </tr>
-                                    </tbody>
+                                    </tr>
+                                    <tr id="SKY_Info2">
+
+                                    </tr>
                                 </table>
                             </div>
                         </div>
