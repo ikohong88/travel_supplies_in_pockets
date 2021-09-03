@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.KTO.KTO_TravelListMapper">
+    <!-- MySQL 테이블 kto_service_code 데이터 조회 -->
+    <select id="kto_select_categoryName" resultType="com.travel.vo.KTO.KTO_CategoryVO">
+        select MainCategory,MiddleCategory,SubCategory from kto_service_code where cat1 = #{cat1} and cat2 = #{cat2} and cat3 = #{cat3};
+    </select>
+
+    <!-- MySQL 테이블 kto_service_code 카테고리2 정보 조회 -->
+    <select id="kto_select_category2_code" resultType="com.travel.vo.KTO.KTO_CategoryVO">
+        select distinct cat2, MiddleCategory from kto_service_code where cat1 = #{cat1};
+    </select>
+    <!-- MySQL 테이블 kto_service_code 카테고리3 정보 조회 -->
+    <select id="kto_select_category3_code" resultType="com.travel.vo.KTO.KTO_CategoryVO">
+        select distinct cat3, SubCategory from kto_service_code where cat2 = #{cat2};
+    </select>
+    <!-- TravelList 조회에 대한 데이터 추출 (수정일 최신순) -->
+    <select id="kto_baseDB_search" resultType="com.travel.vo.KTO.KTO_baseDBVO">  
+    select kto_areabasedlist.*, DATE_FORMAT(date_add(modifiedtime, interval 1 DAY),'%Y-%m-%d') as format_mod, kto_areacode.areaCodeName, kto_areacode.name, kto_service_code.MainCategory, kto_service_code.MiddleCategory, kto_service_code.SubCategory 
+        from kto_areabasedlist left join kto_areacode
+        on kto_areabasedlist.areacode = kto_areacode.areaCode and kto_areabasedlist.sigungucode = kto_areacode.code
+        left join kto_service_code
+        on kto_areabasedlist.cat1 = kto_service_code.cat1 and kto_areabasedlist.cat2 = kto_service_code.cat2 and kto_areabasedlist.cat3 = kto_service_code.cat3
+        where kto_areabasedlist.areacode = #{sidocode}
+        <if test="gubuncode!=null">
+        and kto_areabasedlist.sigungucode = CAST(#{gubuncode} as unsigned)
+        </if>
+        <if test="cat1!=null">
+        and kto_areabasedlist.cat1 = #{cat1}
+        </if>
+        <if test="cat2!=null"> 
+        and kto_areabasedlist.cat2 = #{cat2}
+        </if>
+        <if test="cat3!=null"> 
+        and kto_areabasedlist.cat3 = #{cat3}
+        </if>
+        order by format_mod desc
+    </select>
+    <!-- TravelList 조회에 대한 데이터 추출 (조회수) -->
+    <select id="kto_baseDB_search_readCnt" resultType="com.travel.vo.KTO.KTO_baseDBVO">  
+    select kto_areabasedlist.*, DATE_FORMAT(date_add(modifiedtime, interval 1 DAY),'%Y-%m-%d') as format_mod, kto_areacode.areaCodeName, kto_areacode.name, kto_service_code.MainCategory, kto_service_code.MiddleCategory, kto_service_code.SubCategory 
+        from kto_areabasedlist left join kto_areacode
+        on kto_areabasedlist.areacode = kto_areacode.areaCode and kto_areabasedlist.sigungucode = kto_areacode.code
+        left join kto_service_code
+        on kto_areabasedlist.cat1 = kto_service_code.cat1 and kto_areabasedlist.cat2 = kto_service_code.cat2 and kto_areabasedlist.cat3 = kto_service_code.cat3
+        where kto_areabasedlist.areacode = #{sidocode}
+        <if test="gubuncode!=null">
+        and kto_areabasedlist.sigungucode = CAST(#{gubuncode} as unsigned)
+        </if>
+        <if test="cat1!=null">
+        and kto_areabasedlist.cat1 = #{cat1}
+        </if>
+        <if test="cat2!=null"> 
+        and kto_areabasedlist.cat2 = #{cat2}
+        </if>
+        <if test="cat3!=null"> 
+        and kto_areabasedlist.cat3 = #{cat3}
+        </if>
+        order by readcount desc
+    </select>
+</mapper>
