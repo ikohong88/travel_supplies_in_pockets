@@ -10,6 +10,6 @@
 </head>
 <body>
     <h1>index 선택화면</h1>
-
+    
 </body>
 </html>

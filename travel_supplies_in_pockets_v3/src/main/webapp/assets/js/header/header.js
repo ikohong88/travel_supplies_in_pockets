@@ -4,6 +4,9 @@ $(function(){
         $(".left_menu").toggleClass("open");
         $("body").toggleClass("open");
     })
+    $("#no_option").click(function() {
+        location.href = "http://localhost:8090/travel/nonselect/suggestion";
+    })
 
     let h_local_sido;
     let h_local_sido_code;
