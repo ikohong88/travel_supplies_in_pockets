@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%@include file="/WEB-INF/views/include/header.jsp"%>
+    <%@include file="/WEB-INF/views/ServiceKey/suggestionServiceKey.jsp"%>
 
     <link rel="stylesheet" href="/assets/css/suggestion/select.css">
 
@@ -21,24 +22,13 @@
                 <h1>여기 어떠세요?</h1>
                     <table>
                         <thead>
-                            <th></th>
+                            <th>카테고리</th>
+                            <th>타이틀</th>
+                            <th>조회수</th>
+                            <th>최종수정일</th>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>리스트 1</td>                    
-                            </tr>
-                            <tr>
-                                <td>리스트 1</td>                    
-                            </tr>
-                            <tr>
-                                <td>리스트 1</td>                    
-                            </tr>
-                            <tr>
-                                <td>리스트 1</td>                    
-                            </tr>
-                            <tr>
-                                <td>리스트 1</td>                    
-                            </tr>
+                        <tbody id="rand20_info">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -68,26 +58,33 @@
                     </table>
                 </div>
             </div>
-            <div id="suggestion_gallery_area">
-                <!-- <img src="http://placehold.it/500x350">
-                <h2>해쉬태그</h2>
-                <p>해쉬</p>
-                <h2>사진 작가/스튜디오 정보</h2>
-                <p>설명</p>
-                <h2>촬영일</h2>
-                <p>설명</p>
-                <h2>장소</h2>
-                <p>설명</p> -->
+            <div class="item_img_scroll_area">
+                <div class="img_scroll">
+                    
+                </div>
+                <div class="img_textInfo">
+
+                </div>
+                <div class="img_indicator_area">
+                    <button id="prev">&lt;</button>
+                    <span class="indicators">
+                        <span class="indicator current"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </span>
+                    <button id="next">&gt;</button>
+                </div>
             </div>
         </div>
         <div id="map_area">
-            <div class="map_wrap">
-                <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-                <div class="hAddr">
-                    <span class="title">지도중심기준 행정동 주소정보</span>
-                    <span id="centerAddr"></span>
-                </div>
-            </div>
+            <div id="map" style="width:100%;height:350px;"></div>
         </div>
     </div>
     </main>

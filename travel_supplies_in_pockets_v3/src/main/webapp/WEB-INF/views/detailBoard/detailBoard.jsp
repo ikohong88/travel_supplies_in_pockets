@@ -14,6 +14,7 @@
         .bAddr {padding:5px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
     </style>
     <%@include file="/WEB-INF/views/include/header.jsp"%>
+    <%@include file="/WEB-INF/views/ServiceKey/detailBoardServiceKey.jsp"%>
     <link rel="stylesheet" href="/assets/css/detailBoard/detailBoard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>

@@ -4,9 +4,44 @@
 #suggestion_travel {
     display: inline-block; vertical-align: top;
 }
-#suggestion_gallery_area {
+
+.item_img_scroll_area{
     display: inline-block; vertical-align: top;
 }
+.img_scroll {
+    display: inline-block; vertical-align: top;
+    width: 600px; height: 630px;
+    overflow: hidden; position: relative;
+    /* overflow-y: auto; */
+}
+.img_scroll div {
+    position: absolute; left: 100%;
+    animation: fadein 5s;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.img_scroll div:first-child {left: 0;}
+.img_indicator_area {
+    text-align: center;
+}
+.img_indicator_area {width: 600px; margin-top: 10px;}
+.img_indicator_area .indicator {
+    width: 8px; height: 8px; vertical-align: middle;
+    display: inline-block; border-radius: 10px;
+    background-color: #999;
+    margin:3px;
+}
+
+.img_indicator_area .indicator.current {background-color: #333;}
+.HashTag {white-space: pre-line;}
+
 #map_area {
     display: inline-block; vertical-align: top;
+    margin-left: 30px; width: 700px;
 }

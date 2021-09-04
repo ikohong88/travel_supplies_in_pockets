@@ -7,6 +7,6 @@
         <if test='sido != null'>
         and galSido like #{sido}
         </if> 
-        order by rand() limit 1;
+        order by rand() limit 10;
     </select>
 </mapper>

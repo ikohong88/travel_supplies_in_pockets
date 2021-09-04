@@ -1,6 +1,7 @@
 package com.travel.api;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.travel.service.TravelGalleryService;
@@ -22,8 +23,8 @@ public class TravelGalleryAPIController {
     ) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         System.out.println(sido);
-        TravelGalleryVO vo = service.tg_select_rand(sido);
-        resultMap.put("data", vo);
+        List<TravelGalleryVO> list = service.tg_select_rand(sido);
+        resultMap.put("data", list);
         return resultMap;
     }
 }
