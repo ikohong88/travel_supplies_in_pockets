@@ -15,6 +15,7 @@
 
     <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
 
     <script src="/assets/js/header/header.js"></script>
@@ -26,7 +27,7 @@
         </a>
         <ul class="main_menu">
             <li>
-                <a href="/travel/select/suggestion">
+                <a href="#">
                     <i class="fas fa-home"></i>
                     <span>여행 추천지 보기</span>
                 </a>
@@ -40,19 +41,19 @@
             <li>
                 <a href="#">
                     <i class="fas fa-home"></i>
-                    <span>Home</span>
+                    <span>여행 날씨/여행지수 보기</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-home"></i>
-                    <span>Home</span>
+                    <span>여행 교통 보기</span>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <i class="fas fa-home"></i>
-                    <span>Home</span>
+                    <span>취향에 맞는 준비물은?</span>
                 </a>
             </li>
         </ul>
@@ -62,7 +63,7 @@
     </div>
     <div class="top_area">
         <h1>
-            <a href="http://localhost:8090">
+            <a href="#" id="Go_index">
                 <i class="fas fa-map-marked-alt"></i>
                 <span>주머니속 여행준비물</span>
                 <br>
@@ -72,27 +73,27 @@
         <div class="settings">
             <div class="setting_row">
                 <span>출발지역 : </span>
-                <select id="header_sido">
+                <select id="header_sido" disabled>
                     
                 </select>
-                <select id="header_gubun">
+                <select id="header_gubun" disabled>
                     <!-- <option class="gubun" value="none">시도를 먼저 선택해주세요.</option> -->
                 </select>
             </div>
             <div class="setting_row">
                 <span>거리 : 반경 </span>
-                <input type="number" id="area">
+                <input type="number" id="area" disabled>
                 <span>Km 이내</span>
             </div>
             <div class="setting_row">
                 <span>취향 : </span>
-                <select id="category">
+                <select id="category" disabled>
                     
                 </select>
             </div>
         </div>
         <div class="setting_btns">
-            <button id="change_option">변경</button>
+            <button id="change_option">변경하기</button>
             <button id="no_option">옵션없이 준비하기</button>
         </div>
     </div>

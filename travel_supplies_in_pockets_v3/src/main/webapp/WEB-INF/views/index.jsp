@@ -44,7 +44,7 @@
                 </div>
                 <button id="ready">준비하러 가기</button>
                 <div id="noplan">
-                    <a href="http://localhost:8090/travel/nonselect/suggestion">출발지 없이 여행준비하기</a>
+                    <a id="nonselect" href="#">출발지 없이 여행준비하기</a>
                 </div>
             </div>
         </div>

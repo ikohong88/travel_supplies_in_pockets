@@ -1,5 +1,7 @@
 $(function(){
     localStorage.clear();
+    // 사용된 localStorage
+    // localStorage.setItem("index_data",JSON.stringify(index_data));
     let i = 1;
     let bgInterval = setInterval(function(){
         $(".container").css(
@@ -9,6 +11,16 @@ $(function(){
         i++;
         if(i > 5) i = 1;
     }, 10000);
+
+    let index_data;
+
+    $("#nonselect").click(function() {
+        index_data = {
+            select:"nonselect"
+        };
+        localStorage.setItem("index_data",JSON.stringify(index_data));
+        location.href = "http://localhost:8090/travel/nonselect/suggestion";
+    });
 
     let local_sido;
     let local_sido_code;
@@ -47,11 +59,16 @@ $(function(){
     })
 
     $("#ready").click(function() {
-        if(local_gubun == null) {
-            alert("지역을 먼저 선택해주세요!");
+        if(local_sido == null) {
+            alert("시도을 먼저 선택해주세요!");
             return;
         }
-        let index_data = {
+        if(local_gubun == null) {
+            alert("구군을 먼저 선택해주세요!");
+            return;
+        }
+        index_data = {
+            select:"select",
             sido:local_sido,
             sido_code:local_sido_code,
             gubun:local_gubun,
