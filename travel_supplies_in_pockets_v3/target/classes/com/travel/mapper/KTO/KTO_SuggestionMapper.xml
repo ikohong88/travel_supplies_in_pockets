@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.KTO.KTO_SuggestionMapper">
+    <select id="kto_select_suggestion" resultType="com.travel.vo.KTO.KTO_baseDBVO">
+        select ka.*, ka2.areaCodeName, ka2.name, ksc.MainCategory, ksc.MiddleCategory, ksc.SubCategory from kto_areabasedlist ka
+        inner join kto_areacode ka2 on ka.areacode = ka2.areaCode and ka.sigungucode = ka2.code
+        inner join kto_service_code as ksc on ka.cat1 = ksc.cat1 and ka.cat2 = ksc.cat2 and ka.cat3 = ksc.cat3
+        <if test='sido != null'>
+        where ka.areacode = #{sido}
+        </if>
+        <if test='gubun != null'>
+        and ka.sigungucode = #{gubun}
+        </if>
+        <if test='cat1 != null'>
+        and ka.cat1 = #{cat1}
+        </if>
+        <if test='dateRange != null'>
+        <![CDATA[
+        and date_format(ka.modifiedtime, "%Y-%m-%d") >= str_to_date(#{dateRange}, "%Y-%m-%d") 
+        ]]>
+        </if>
+        order by rand() limit 20;
+    </select>
+</mapper>

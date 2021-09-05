@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TravelSuppliesInPocketsV3Application<travel_supplies_in_pockets_v3>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.travel.TravelSuppliesInPocketsV3Application",
+            "projectName": "travel_supplies_in_pockets_v3",
+            "args": ""
+        }
+    ]
+}
