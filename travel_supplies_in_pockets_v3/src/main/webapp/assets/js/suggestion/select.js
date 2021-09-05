@@ -4,10 +4,11 @@ window.onload = $(function() {
 
     select_rand_gallery(index_data.sido);
     select_suggestion_info(index_data.sido_code, index_data.gubun_code, index_data.cat1_code);
-    KakaoMap();
+    var suggestion_Kakaomap = new Array();
+
+    KakaoMap(index_data.lat, index_data.lng, suggestion_Kakaomap);
     
     let scr_pos = 0;
-
     $("#next").click(function(){
         $(".img_scroll div").eq(scr_pos).stop().animate({"left":"-100%"}, 300);
         scr_pos++;
@@ -39,7 +40,17 @@ window.onload = $(function() {
             url:url,
             success:function(suggestion) {
                 console.log(suggestion);
+                let page_maxNum = Math.ceil(suggestion.data.length/5);
+                $(".suggestion1_total").append(page_maxNum);
+                for(let i=0; i<page_maxNum; i++) {
+                    let _tag = "<tbody class='suggestion1_tbody'></tbody>";
+                    $("#suggestion1_table").append(_tag);
+                }
                 for(let i = 0; i<suggestion.data.length; i++) {
+                    suggestion_Kakaomap.push({
+                        title: suggestion.data[i].title, 
+                        latlng: new kakao.maps.LatLng(suggestion.data[i].mapy,suggestion.data[i].mapx)
+                    });
                     let category = suggestion.data[i].mainCategory+" > "+suggestion.data[i].middleCategory+" > "+suggestion.data[i].subCategory;
                     let _modifiedtime = new Date(suggestion.data[i].modifiedtime);
                     _modifiedtime.setHours(_modifiedtime.getHours()+9);
@@ -47,6 +58,8 @@ window.onload = $(function() {
                     let mod_month = _modifiedtime.getMonth() + 1; 
                     let mod_date = _modifiedtime.getDate();
                     let format_mod = (`${mod_year}-${mod_month >= 10 ? mod_month : '0' + mod_month}-${mod_date >= 10 ? mod_date : '0' + mod_date}`);
+                    
+                    let page = Math.floor(i/5);                  
                     let rand20_tag = 
                     '<tr>'+
                         '<td>'+category+'</td>'+                    
@@ -54,8 +67,26 @@ window.onload = $(function() {
                         '<td>'+suggestion.data[i].readcount+'</td>'+                    
                         '<td>'+format_mod+'</td>'+                    
                     '</tr>'
-                    $("#rand20_info").append(rand20_tag);
+                    $(".suggestion1_tbody").eq(page).append(rand20_tag); 
                 }
+                $(".suggestion1_tbody").eq(0).addClass("active");
+        
+                $("#suggestion1_next").click(function() {
+                    let currentPage = Number($(".current").html());
+                    currentPage++;
+                    if(currentPage > page_maxNum) currentPage = page_maxNum;
+                    $(".current").html(currentPage);
+                    $(".suggestion1_tbody").removeClass("active");
+                    $(".suggestion1_tbody").eq(currentPage-1).addClass("active");
+                })
+                $("#suggestion1_prev").click(function() {
+                    let currentPage = Number($(".current").html());
+                    currentPage--;
+                    if(currentPage <= 0) currentPage = 1;
+                    $(".current").html(currentPage);
+                    $(".suggestion1_tbody").removeClass("active");
+                    $(".suggestion1_tbody").eq(currentPage-1).addClass("active");
+                })
             }
         })
     }
@@ -90,34 +121,20 @@ window.onload = $(function() {
     }
 
     // 카카오맵 선택된 장소 지도 표시
-    function KakaoMap() {
+    function KakaoMap(lat,lng, setPosition) {
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
         mapOption = { 
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+            level: 8 // 지도의 확대 레벨
         };
 
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
         
         // 마커를 표시할 위치와 title 객체 배열입니다 
         var positions = [
-            {
-                title: '카카오', 
-                latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-            },
-            {
-                title: '생태연못', 
-                latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-            },
-            {
-                title: '텃밭', 
-                latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-            },
-            {
-                title: '근린공원',
-                latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-            }
+            setPosition
         ];
+        console.log(setPosition);
 
         // 마커 이미지의 이미지 주소입니다
         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 

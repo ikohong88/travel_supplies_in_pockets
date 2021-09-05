@@ -2,10 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.travel.mapper.ComponentMapper">
-<!-- MySQL 	지역기반 관광정보 데이터 삽입 -->
+    <!-- MySQL 	지역기반 관광정보 데이터 삽입 -->
     <insert id="kto_insert_baseDBList">
     INSERT ignore INTO travel_supplies_in_pockets.kto_areabasedlist
     (areacode, cat1, cat2, cat3, contentid, contenttypeid, createdtime, firstimage, firstimage2, mapx, mapy, mlevel, readcount, sigungucode, title, modifiedtime)
     VALUES(#{areacode}, #{cat1}, #{cat2}, #{cat3}, #{contentid}, #{contenttypeid}, #{createdtime}, #{firstimage}, #{firstimage2}, #{mapx}, #{mapy}, #{mlevel}, #{readcount}, #{sigungucode}, #{title}, #{modifiedtime});
+    </insert>
+    <!-- MySQL 사진데이터 삽입 -->
+    <insert id="tg_insert_gallery">
+        insert ignore into travel_gallery (galContentId,galContentTypeId,galPhotographer,galPhotographyYear,galPhotographyMonth,galHashTag,galTitle,galWebImageUrl,galSido,galGu,galPhotographyLocation)
+        values (#{galContentId},#{galContentTypeId},#{galPhotographer},#{galPhotographyYear},#{galPhotographyMonth},#{galHashTag},#{galTitle},#{galWebImageUrl},#{galSido},#{galGu},#{galPhotographyLocation});
     </insert>
 </mapper>

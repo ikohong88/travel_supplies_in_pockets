@@ -22,9 +22,6 @@ import org.w3c.dom.NodeList;
 @Component
 public class KTO_Component extends ServiceKey {
     @Autowired ComponentService service;
-
-
-
     @Scheduled(cron = "0 30 15 */1 * *") // 매일 15시 30분 데이터 업데이트
     public void putKTOTouristInfoAreaBasedList() throws Exception {
         StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"); /*URL*/
