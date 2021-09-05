@@ -5,6 +5,20 @@
     display: inline-block; vertical-align: top;
 }
 
+/* .region_confirm_area {overflow-y: scroll;} */
+#suggestion1_table {font-size: 12px; width: 100%; font-family: "Noto Sans KR", sans-serif;
+}
+#suggestion1_table td {width: 30.33%; text-align: center;
+padding: 10px 0; border: 1px solid #eee;}
+#suggestion1_table thead td {background-color: #999; color: #fff;}
+#suggestion1_table tbody td:last-child {color: rgb(255, 60, 60);}
+.suggestion1_pager_area {font-size: 12px; text-align: center;
+margin-top: 10px;}
+.suggestion1_pager_area .current {font-weight: 700;}
+
+.suggestion1_tbody {display: none;}
+.suggestion1_tbody.active {display: table-row-group;}
+
 .item_img_scroll_area{
     display: inline-block; vertical-align: top;
 }

@@ -20,21 +20,23 @@
             <div id="suggestion_travel">
                 <div id="suggestion1">
                 <h1>여기 어떠세요?</h1>
-                    <table>
+                    <table id="suggestion1_table">
                         <thead>
                             <th>카테고리</th>
                             <th>타이틀</th>
                             <th>조회수</th>
                             <th>최종수정일</th>
                         </thead>
-                        <tbody id="rand20_info">
-                            
-                        </tbody>
                     </table>
+                    <div class="suggestion1_pager_area">
+                        <button id="suggestion1_prev">&lt;</button>
+                        <span class="current">1</span> / <span class="suggestion1_total"></span>
+                        <button id="suggestion1_next">&gt;</button>
+                    </div>    
                 </div>
                 <div id="suggestion2">
                     <h1>조금 더 먼곳도 알아볼까요?</h1>
-                    <table>
+                    <table id="suggestion2_table">
                         <thead>
                             <th></th>
                         </thead>
