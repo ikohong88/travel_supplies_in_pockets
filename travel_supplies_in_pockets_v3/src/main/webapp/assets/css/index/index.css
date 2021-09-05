@@ -1,0 +1,81 @@
+.container {
+    width: 100vw; height: 100vh;
+    background-image: url("/assets/images/bg5.jpg");
+    background-size: 2000px auto;
+    background-position: center;
+    overflow: hidden;
+    transition:background-image 3.5s;
+}
+.container > div {
+    width: 50%; height: 100%;
+    float: left;
+}
+.left {
+    background-color: rgba(255,255,255,0.8);
+}
+.left_contents {
+    padding:10vh 5vw;
+}
+.left_contents > h1 {font-family: "Vitro Pride";
+    font-size: 2.708vw; letter-spacing: 2px;
+    color: #333; margin-bottom: 1.5vh;
+}
+.left_contents > h2 {font-family: "Elice Digital Baeum";
+    font-weight: 800; font-size: 3.02vw; color: #333;
+    letter-spacing: 3px; margin-bottom: 10vh;
+}
+.left_contents > h3 {font-family: "Elice Digital Baeum";
+    font-weight: 800; font-size: 1.8vw;
+    color: #333;
+    margin-bottom: 3vh;
+}
+.select_box {background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    margin-bottom: 1.5vh;
+    height:9.06vh
+}
+.select_box_region {background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    margin-bottom: 1.5vh;
+    height:9.06vh
+}
+.square {
+    width: 9.06vh; height:9.06vh; background-color: #333;
+    display: inline-block; vertical-align: middle;
+}
+.select_box select {
+    font-family: "Elice Digital Baeum";
+    font-weight: 400;
+    font-size: 2.1vw; vertical-align: middle;
+    width: calc(100% - 11.06vh);
+    border: 0; margin-left: 1vh;
+    outline:none; color: #333;
+}
+.select_box_region select {
+    font-family: "Elice Digital Baeum";
+    font-weight: 400;
+    font-size: 1.3vw; vertical-align: middle;
+    width: calc(100% - 49.06vh);
+    border: 0; margin-left: 1vh;
+    outline:none; color: #333;
+}
+#ready {
+    background-color: #777; border: 0;
+    font-size: 2.1vw;
+    width: 100%; padding: 0;
+    height: 9.06vh;
+    font-family: "Elice Digital Baeum"; color: #f4f4f4;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    cursor:pointer;
+    outline:none;
+    transition:background-color 0.2s;
+}
+#ready:hover {
+    background-color: #333;
+}
+#noplan {text-align: center; margin-top: 6vh;}
+#noplan a {
+    font-family: "Elice Digital Baeum";
+    font-size: 1.4vw;
+    color: #333;
+}

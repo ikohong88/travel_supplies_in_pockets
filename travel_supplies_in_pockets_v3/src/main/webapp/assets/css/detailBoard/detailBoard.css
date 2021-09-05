@@ -1,0 +1,69 @@
+main {
+    padding:20px;
+}
+.container .sitemap {font-size: 14px; margin-bottom: 20px;}
+.container .sitemap a {color: #333; text-decoration: none; font-weight: 700;}
+.container .sitemap a:hover {text-decoration: underline;}
+.item_details {
+    width:1200px;
+}
+.item_details > div {display: inline-block;
+vertical-align: top;}
+.item_details .item_left {width: 600px;}
+.item_details .item_right {width: 590px;
+box-sizing: border-box; padding-left: 50px;}
+
+.item_title {margin-bottom: 20px;}
+.item_title h1 {width: 490px; display: inline-block;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    vertical-align: middle; font-size: 32px; font-weight: 700;
+}
+.item_title p {font-size: 12px; margin-bottom: 5px;}
+.item_title p:last-child {margin-bottom: 0;}
+.item_title .item_time_info {
+    display: inline-block; vertical-align: middle;
+}
+.img_scroll {
+    width: 600px; height: 630px;
+    overflow: hidden; position: relative;
+}
+.img_scroll img {
+    position: absolute; left: 50%; top:50%; transform: translate(-50%, -50%);
+}
+/* .img_scroll img:first-child {left: 0;} */
+.img_indicator_area {
+    text-align: center;
+}
+.img_indicator_area {width: 600px; margin-top: 10px;}
+.img_indicator_area .indicator {
+    width: 8px; height: 8px; vertical-align: middle;
+    display: inline-block; border-radius: 10px;
+    background-color: #999;
+    margin:3px;
+}
+.img_indicator_area .indicator.current {background-color: #333;}
+.item_right h2 {
+    font-size: 18px; font-weight: 700; margin-bottom: 10px;
+}
+.item_right p {
+    line-height: 1.4; margin-bottom: 20px;
+}
+.item_right table {margin-bottom: 20px; width: 530px; text-align: center;}
+.item_right table th, .item_right table td {
+    border: 1px solid #ccc; padding:5px;
+}
+.item_right table th {background-color: #999; color: #fff;}
+.contents_area > div {display: inline-block; vertical-align: top;}
+.map_area {margin-left: 30px;}
+
+.weatherChartArea > .weather_chart {display: inline-block; vertical-align: top;}
+.weatherChartArea > .text_info {display: inline-block; vertical-align: top;}
+.text_info > h1 {font-size: 60px; font-weight: 700; text-align: center;}
+.text_info > h2 {font-size: 30px; font-weight: 500; text-align: center;}
+.weatherTextArea > .text_info {display: inline-block; vertical-align: top;}
+
+#PCP_Table {width: 44%; display: inline-block; vertical-align: top;}
+#PCP_Table > table {width: 100%; display: inline-block; vertical-align: top;}
+#POP_TextInfo {display: inline-block; vertical-align: top;}
+#POP_TextInfo > h1 {font-size: 60px; font-weight: 700; text-align: center;}
+#POP_TextInfo > h2 {font-size: 30px; font-weight: 500; text-align: center;}
