@@ -1,6 +1,5 @@
 $(function(){
     localStorage.clear();
-    // 사용된 localStorage
     // localStorage.setItem("index_data",JSON.stringify(index_data));
     let i = 1;
     let bgInterval = setInterval(function(){
@@ -18,7 +17,11 @@ $(function(){
         index_data = {
             select:"nonselect"
         };
+        travel_weather = {
+            select:"nonselect"
+        }
         localStorage.setItem("index_data",JSON.stringify(index_data));
+        localStorage.setItem("travel_weather",JSON.stringify(travel_weather));
         location.href = "http://localhost:8090/travel/nonselect/suggestion";
     });
 

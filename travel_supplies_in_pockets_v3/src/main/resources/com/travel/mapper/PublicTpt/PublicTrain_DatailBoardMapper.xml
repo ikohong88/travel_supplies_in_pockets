@@ -8,8 +8,9 @@
     </select>
 
     <insert id="publicTrain_insert_RouteResult">
-        INSERT INTO travel_supplies_in_pockets.publictpt_resultroute
-        (adultcharge, arrplacename, depplacename)
-        VALUES(#{adultcharge}, #{arrplacename}, #{depplacename});
+        insert into publictpt_resultroute (adultcharge, arrplacename,depplacename,traingradename)
+        select #{adultcharge},#{arrplacename},#{depplacename},#{traingradename} from dual
+        where not exists
+        (select * from publictpt_resultroute where adultcharge = #{adultcharge} and arrplacename = #{arrplacename} and depplacename = #{depplacename} and traingradename = #{traingradename});
     </insert>
 </mapper>

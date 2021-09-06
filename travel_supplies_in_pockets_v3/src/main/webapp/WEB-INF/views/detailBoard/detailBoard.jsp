@@ -194,6 +194,7 @@
                                     </tr>
                                 </table>
                             </div>
+                        <button id="Weather_detail">날씨상세정보 보기</button>
                         </div>
                     </div>
                 </div>

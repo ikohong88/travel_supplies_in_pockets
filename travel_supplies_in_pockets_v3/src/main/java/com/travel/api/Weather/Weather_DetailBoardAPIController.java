@@ -37,15 +37,22 @@ public class Weather_DetailBoardAPIController extends ServiceKey {
         @RequestParam @Nullable String dong
     ) {
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
-        Integer dongLength = dong.length();
         String _dong = "";
-        if(dong.length() != 0) {
-            for(int i = 0; i < dongLength; i++) {
-                int j = i+1;
-                _dong += "%"+(dong.substring(i,j));
-            }
+        Weather_SearchNxNyVO vo = new Weather_SearchNxNyVO();
+        if(dong == null) {
+            vo = service.weather_select_nxny(sido, gubun, _dong);
         }
-        Weather_SearchNxNyVO vo = service.weather_select_nxny(sido, gubun, _dong);
+        else if(dong != null) {
+            Integer dongLength = dong.length();
+            if(dong.length() != 0) {
+                for(int i = 0; i < dongLength; i++) {
+                    int j = i+1;
+                    _dong += "%"+(dong.substring(i,j));
+                }
+            }
+            vo = service.weather_select_nxny(sido, gubun, _dong);
+        }
+
         if(vo == null) {
             _dong = "";
             vo = service.weather_select_nxny(sido, gubun, _dong);

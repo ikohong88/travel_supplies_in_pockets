@@ -29,6 +29,13 @@ window.onload = $(function() {
     let start_Trainstts;
     let t_check_Null_cnt = 0;
 
+    let chart_TMP = new Array(); let chart_UUU = new Array();
+    let chart_VVV = new Array(); let chart_VEC = new Array();
+    let chart_WSD = new Array(); let chart_SKY = new Array();
+    let chart_PTY = new Array(); let chart_POP = new Array();
+    let chart_PCP = new Array(); let chart_REH = new Array();
+    let chart_SNO = new Array(); let chart_hour = new Array();
+
     // 카테고리 화면 추가
     let category_tag = 
         '<a href="#">'+Select_travel_info.mainCategory+'</a>'+
@@ -112,6 +119,10 @@ window.onload = $(function() {
         $("#explanation").hide();
         $("#transportation").hide();
         $("#weatherInfo").show();
+    })
+
+    $("#Weather_detail").click(function() {
+        location.href = "http://localhost:8090/travel/Weather";
     })
 
     // openapi 소개정보 조회
@@ -1140,12 +1151,13 @@ window.onload = $(function() {
             url:"/openapi/weather/Weather?nx="+nx+"&ny="+ny,
             success:function(weather) {
                 console.log(weather);
-                let chart_TMP = new Array(); let chart_UUU = new Array();
-                let chart_VVV = new Array(); let chart_VEC = new Array();
-                let chart_WSD = new Array(); let chart_SKY = new Array();
-                let chart_PTY = new Array(); let chart_POP = new Array();
-                let chart_PCP = new Array(); let chart_REH = new Array();
-                let chart_SNO = new Array(); let chart_hour = new Array();
+                localStorage.setItem("travel_weather",JSON.stringify(weather));
+                // let chart_TMP = new Array(); let chart_UUU = new Array();
+                // let chart_VVV = new Array(); let chart_VEC = new Array();
+                // let chart_WSD = new Array(); let chart_SKY = new Array();
+                // let chart_PTY = new Array(); let chart_POP = new Array();
+                // let chart_PCP = new Array(); let chart_REH = new Array();
+                // let chart_SNO = new Array(); let chart_hour = new Array();
                 let TMP; let UUU; let VVV; let VEC; let WSD; let SKY; let PTY; let POP; let PCP; let REH; let SNO;
                 for (let i = 0; i < 12; i++) {
                     let setDate = new Date();

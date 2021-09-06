@@ -27,7 +27,7 @@
         </a>
         <ul class="main_menu">
             <li>
-                <a href="#">
+                <a href="/travel/select/suggestion">
                     <i class="fas fa-home"></i>
                     <span>여행 추천지 보기</span>
                 </a>
@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/travel/Weather">
                     <i class="fas fa-home"></i>
                     <span>여행 날씨/여행지수 보기</span>
                 </a>

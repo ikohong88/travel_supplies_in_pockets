@@ -53,9 +53,10 @@ margin-top: 10px;}
 }
 
 .img_indicator_area .indicator.current {background-color: #333;}
-.HashTag {white-space: pre-line;}
+/* .HashTag {white-space: pre-line;} */
 
-#map_area {
+.map_wrap {
     display: inline-block; vertical-align: top;
-    margin-left: 30px; width: 700px;
+    margin-left: 30px;
 }
+.RandTG_detail {background-color: #fff;}

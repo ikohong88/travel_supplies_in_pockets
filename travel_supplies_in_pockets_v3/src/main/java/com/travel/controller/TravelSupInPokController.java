@@ -30,4 +30,9 @@ public class TravelSupInPokController {
     public String getTravelDetailDashBoard() {
         return "/detailBoard/detailBoard";
     }
+
+    @GetMapping("/travel/Weather")
+    public String getTravelWeather() {
+        return "/Weather/Weather";
+    }
 }
