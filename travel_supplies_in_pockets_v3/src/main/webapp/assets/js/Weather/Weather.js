@@ -21,22 +21,26 @@ $(function() {
     // let search_time = Math.ceil((travel_weather.data.length/11));
     if (index_data.select == "nonselect") {
         searchWeather(60,127);
+        AdiffusionIndex('서울특별시');
     }
     else if (travel_weather == null) {
         searchNxNy(index_data.sido, index_data.gubun);
         region_tag = index_data.sido+" "+index_data.gubun;
         $("#Weather_region").append(region_tag);
+        AdiffusionIndex(index_data.sido);
     }
     else if(travel_weather.select == "nonselect") {
         searchNxNy(index_data.sido, index_data.gubun);
         region_tag = index_data.sido+" "+index_data.gubun;
         $("#Weather_region").append(region_tag);
+        AdiffusionIndex(index_data.sido);
     } 
     else {
         let search_time = Math.ceil((travel_weather.data.length/11));
         region_tag = Select_travel_info.addr1+" "+Select_travel_info.addr2+" "+Select_travel_info.addr3+" [ "+Select_travel_info.title+" ]";
         $("#Weather_region").append(region_tag);
         travel_weatherInfo(search_time);
+        AdiffusionIndex(Select_travel_info.addr1);
     }
     Weater_RDR();
 
@@ -501,5 +505,62 @@ $(function() {
             }
         }
         // window.weather_Chart.destroy();
+    }
+
+    function AdiffusionIndex(sido) {
+        $.ajax({
+            type:"get",
+            url:"/api/weather/AdiffusionIndex?sido="+sido,
+            success:function(ADI) {
+                console.log(ADI);
+                weather_UVIdx(ADI.data.areaNo);
+                var date = ADI.data.date
+                var ADI_year = date.substring(0,4);
+                var ADI_Month = date.substring(4,6);
+                var ADI_day = date.substring(6,8);
+                var ADI_Hour = date.substring(8,10);
+                $("#ADI_FullDate").append(ADI_year+"-"+ADI_Month+"-"+ADI_day+"-"+ADI_Hour+"시 기준");
+                var ADI_tag1 = 
+                    '<td>'+ADI.data.h3+'</td>'+
+                    '<td>'+ADI.data.h6+'</td>'+
+                    '<td>'+ADI.data.h9+'</td>'+
+                    '<td>'+ADI.data.h12+'</td>'+
+                    '<td>'+ADI.data.h15+'</td>'+
+                    '<td>'+ADI.data.h18+'</td>'+
+                    '<td>'+ADI.data.h21+'</td>'+
+                    '<td>'+ADI.data.h24+'</td>'+
+                    '<td>'+ADI.data.h27+'</td>'+
+                    '<td>'+ADI.data.h30+'</td>'+
+                    '<td>'+ADI.data.h33+'</td>'+
+                    '<td>'+ADI.data.h36+'</td>'+
+                    '<td>'+ADI.data.h39+'</td>'
+                $("#ADI_Info1").append(ADI_tag1);
+                var ADI_tag2 = 
+                    '<td>'+ADI.data.h42+'</td>'+
+                    '<td>'+ADI.data.h45+'</td>'+
+                    '<td>'+ADI.data.h48+'</td>'+
+                    '<td>'+ADI.data.h51+'</td>'+
+                    '<td>'+ADI.data.h54+'</td>'+
+                    '<td>'+ADI.data.h57+'</td>'+
+                    '<td>'+ADI.data.h60+'</td>'+
+                    '<td>'+ADI.data.h63+'</td>'+
+                    '<td>'+ADI.data.h66+'</td>'+
+                    '<td>'+ADI.data.h69+'</td>'+
+                    '<td>'+ADI.data.h72+'</td>'+
+                    '<td>'+ADI.data.h75+'</td>'+
+                    '<td>'+ADI.data.h78+'</td>'
+                $("#ADI_Info2").append(ADI_tag2);
+            }
+        })
+    }
+
+    function weather_UVIdx(areaNo) {
+        $.ajax({
+            type:"get",
+            url:"/openapi/weather/UVIdx?areaNo="+areaNo,
+            success:function(UV) {
+                console.log(UV);
+            }
+        })
     }
 })

@@ -3,6 +3,7 @@ package com.travel.service.Weather;
 import java.util.List;
 
 import com.travel.mapper.Weather.Weather_DetailBoardMapper;
+import com.travel.vo.Weather.Weather_AdiffusionIndexVO;
 import com.travel.vo.Weather.Weather_CodeVO;
 import com.travel.vo.Weather.Weather_SearchNxNyVO;
 
@@ -17,5 +18,8 @@ public class Weather_DetailBoardService {
     }
     public List<Weather_CodeVO> weather_select_code() {
         return mapper.weather_select_code();
+    }
+    public Weather_AdiffusionIndexVO weather_select_adiffusionindex(String sido, String date) {
+        return mapper.weather_select_adiffusionindex(sido, date);
     }
 }

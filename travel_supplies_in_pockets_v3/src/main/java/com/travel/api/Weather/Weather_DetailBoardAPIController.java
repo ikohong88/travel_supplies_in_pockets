@@ -13,9 +13,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.travel.api.ServiceKey;
 import com.travel.service.Weather.Weather_DetailBoardService;
+import com.travel.vo.Weather.Weather_AdiffusionIndexVO;
 import com.travel.vo.Weather.Weather_CodeVO;
 import com.travel.vo.Weather.Weather_SearchNxNyVO;
+import com.travel.vo.Weather.Weather_UVIdx;
 import com.travel.vo.Weather.Weather_openapi_VilageFcstVO;
+
+// import org.python.core.PyFunction;
+// import org.python.core.PyInteger;
+// import org.python.core.PyObject;
+// import org.python.core.PyString;
+// import org.python.util.PythonInterpreter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -30,6 +38,8 @@ import org.w3c.dom.NodeList;
 @RestController
 public class Weather_DetailBoardAPIController extends ServiceKey {
     @Autowired Weather_DetailBoardService service;
+    
+    // DB 변환된 주소를 통한 코드 조회
     @GetMapping("/api/weather/SearchNxNy")
     public Map<String,Object> getNxNy(
         @RequestParam String sido,
@@ -61,6 +71,7 @@ public class Weather_DetailBoardAPIController extends ServiceKey {
         return resultMap;
     }
 
+    // 단기예보 조회
     @GetMapping("/openapi/weather/Weather")
     public Map<String,Object> getWeatherCode(
         @RequestParam String nx,
@@ -86,7 +97,7 @@ public class Weather_DetailBoardAPIController extends ServiceKey {
         _nowTime = nowTime_formatter.format(nowDate.getTime());
 
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst"); /*URL*/
-        urlBuilder.append(getServiceKey()); /*Service Key*/
+        urlBuilder.append(getServiceKey_new()); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
@@ -186,7 +197,7 @@ public class Weather_DetailBoardAPIController extends ServiceKey {
             resultCode = Integer.parseInt(getTagValue("resultCode", helem));
         }
 
-        System.out.println("데이터 수 : "+nList.getLength());
+        // System.out.println("데이터 수 : "+nList.getLength());
         
         ArrayList<Weather_openapi_VilageFcstVO> list = new ArrayList<>();
         
@@ -228,4 +239,108 @@ public class Weather_DetailBoardAPIController extends ServiceKey {
         resultMap.put("data", list);
         return resultMap;
     }
+
+    @GetMapping("/api/weather/AdiffusionIndex")
+    public Map<String,Object> getAdiffusionIndex(
+        @RequestParam String sido
+    ) {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        SimpleDateFormat now_formatter = new SimpleDateFormat("yyyyMMdd");
+        Calendar nowDate = Calendar.getInstance();
+        Calendar standard = Calendar.getInstance();
+        String _nowDate = "";
+        standard.set(Calendar.HOUR_OF_DAY, 18);
+        standard.set(Calendar.MINUTE, 30);
+        if(nowDate.getTimeInMillis() < standard.getTimeInMillis()) {
+            nowDate.add(Calendar.DATE, -1);
+        };
+        _nowDate = now_formatter.format(nowDate.getTime());
+        String date = _nowDate + "18";
+        System.out.println(date);
+
+        Weather_AdiffusionIndexVO vo = service.weather_select_adiffusionindex(sido, date);
+        resultMap.put("data", vo);
+
+        return resultMap;
+    }
+
+    @GetMapping("/openapi/weather/UVIdx")
+    public Map<String, Object> getUVIdx(
+        @RequestParam String areaNo
+    ) throws Exception {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        SimpleDateFormat now_formatter = new SimpleDateFormat("yyyyMMdd");
+        Calendar nowDate = Calendar.getInstance();
+        Calendar standard = Calendar.getInstance();
+        String _nowDate = "";
+        standard.set(Calendar.HOUR_OF_DAY, 18);
+        standard.set(Calendar.MINUTE, 30);
+        if(nowDate.getTimeInMillis() < standard.getTimeInMillis()) {
+            nowDate.add(Calendar.DATE, -1);
+        };
+        _nowDate = now_formatter.format(nowDate.getTime());
+        String date = _nowDate + "18";
+        
+        StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/LivingWthrIdxServiceV2/getUVIdxV2"); /*URL*/
+        urlBuilder.append(getServiceKey()); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수 Default: 10*/
+        urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("XML", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
+        urlBuilder.append("&" + URLEncoder.encode("areaNo","UTF-8") + "=" + URLEncoder.encode(areaNo, "UTF-8")); /*서울지점 공백일때: 전체지점조회*/
+        urlBuilder.append("&" + URLEncoder.encode("time","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*21년7월6일 18시 발표*/
+        
+        DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(urlBuilder.toString());
+
+        doc.getDocumentElement().normalize();
+        // System.out.println(doc.getDocumentElement().getNodeName());
+
+        NodeList nList = doc.getElementsByTagName("item");
+
+        NodeList hList = doc.getElementsByTagName("header");
+        Node hn = hList.item(0);
+        Element helem = (Element)hn;
+
+        System.out.println("데이터 수 : "+nList.getLength());
+
+        Node n = nList.item(0);
+        Element elem = (Element)n;
+        
+        Weather_UVIdx vo = new Weather_UVIdx();
+        vo.setAreaNo(getTagValue("areaNo", elem));
+        vo.setCode(getTagValue("code", elem));
+        vo.setDate(getTagValue("date", elem));
+        try {
+            vo.setDayaftertomorrow(getTagValue("dayaftertomorrow", elem));
+        } catch(NullPointerException ne) {
+            vo.setDayaftertomorrow("데이터 없음");
+        }
+        vo.setToday(getTagValue("today", elem));
+        vo.setTomorrow(getTagValue("tomorrow", elem));
+        vo.setTwodaysaftertomorrow(getTagValue("twodaysaftertomorrow", elem));
+
+        resultMap.put("data", vo);
+
+        return resultMap;
+    }
+
+    // @GetMapping("/test")
+    // public void getTest() {
+    //     PythonInterpreter interpreter = new PythonInterpreter();
+    //     interpreter.execfile("C:/Users/SPen_HWS/Desktop/test.py");
+    //     interpreter.exec("print(crawling_AdifIndex())");
+    //     // execute a function that takes a string and returns a string
+        
+    //     PyFunction pyFunction = (PyFunction) interpreter.get("crawling_AdifIndex",PyFunction.class);
+    //     // int a = 10, b = 20;
+    //     // new PyInteger(a), new PyInteger(b)
+    //     PyObject pyobj = pyFunction.__call__();
+    //     System.out.println(pyobj.toString());
+
+    //     // PyObject someFunc = interpreter.get("funcName");
+    //     // PyObject result = someFunc.__call__(new PyString("Test!"));
+    //     // String realResult = (String) result.__tojava__(String.class);
+    //     interpreter.close();
+    // }
 }

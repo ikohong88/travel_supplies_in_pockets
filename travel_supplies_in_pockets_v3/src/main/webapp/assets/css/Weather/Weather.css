@@ -1,2 +1,13 @@
 #RDR {display: inline-block; vertical-align: top;}
 #weatherInfo{display: inline-block; vertical-align: top;}
+
+.weatherTableArea table {margin-bottom: 20px; width: 530px; text-align: center;}
+.weatherTableArea table th, .item_right table td {
+    border: 1px solid #ccc; padding:5px;
+}
+.weatherTableArea table th {background-color: #999; color: #fff;}
+.weatherPCP_POPArea table {margin-bottom: 20px; width: 530px; text-align: center;}
+.weatherPCP_POPArea table th, .item_right table td {
+    border: 1px solid #ccc; padding:5px;
+}
+.weatherPCP_POPArea table th {background-color: #999; color: #fff;}

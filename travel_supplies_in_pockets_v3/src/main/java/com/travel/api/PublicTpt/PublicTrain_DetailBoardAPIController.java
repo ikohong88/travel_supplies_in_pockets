@@ -124,10 +124,8 @@ public class PublicTrain_DetailBoardAPIController extends ServiceKey {
                 service.publicTrain_insert_RouteResult(vo);
             }
         }
-
         resultMap.put("data", List);
 
         return resultMap;
     }
-
 }
