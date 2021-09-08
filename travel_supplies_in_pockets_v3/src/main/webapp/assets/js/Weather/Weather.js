@@ -469,7 +469,7 @@ $(function() {
                 if(j = (chart_PCP.length-1)) {
                     if(chart_PCP[j] == "강수없음") {
                     PCP_tag = 
-                    '<td id="PCP_Info" colspan="2">12시간동안 강수 예정 없음</td>'
+                    '<td id="PCP_Info" colspan="2">조회일정동안 강수 예정 없음</td>'
                     $("#PCP_POPInfo").append(PCP_tag);
                     } 
                 }
@@ -557,9 +557,27 @@ $(function() {
     function weather_UVIdx(areaNo) {
         $.ajax({
             type:"get",
-            url:"/openapi/weather/UVIdx?areaNo="+areaNo,
+            url:"/api/weather/UVIdx?areaNo="+areaNo,
             success:function(UV) {
                 console.log(UV);
+                var date = UV.data.date
+                var UV_year = date.substring(0,4);
+                var UV_Month = date.substring(4,6);
+                var UV_day = date.substring(6,8);
+                var UV_Hour = date.substring(8,10);
+                $("#UVIdx_FullDate").append(UV_year+"-"+UV_Month+"-"+UV_day+"-"+UV_Hour+"시 기준");
+                var twodaysaftertomorrow;
+                if(UV.data.twodaysaftertomorrow == null) {
+                    twodaysaftertomorrow = "18시 이후 조회가 가능합니다."
+                } else {
+                    twodaysaftertomorrow = UV.data.twodaysaftertomorrow;
+                }
+                var UV_tag = 
+                    '<td>'+UV.data.today+'</td>'+
+                    '<td>'+UV.data.tomorrow+'</td>'+
+                    '<td>'+UV.data.dayaftertomorrow+'</td>'+
+                    '<td>'+twodaysaftertomorrow+'</td>'
+                $("#UVIdx_Info").append(UV_tag);
             }
         })
     }

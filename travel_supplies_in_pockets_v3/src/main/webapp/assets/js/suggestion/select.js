@@ -15,18 +15,25 @@ window.onload = $(function() {
     
     let scr_pos = 0;
     $("#next").click(function(){
+        if(scr_pos == $(".img_scroll div").length-1) {
+            return;
+        }
         $(".img_scroll div").eq(scr_pos).stop().animate({"left":"-100%"}, 300);
         scr_pos++;
-        if(scr_pos >= $(".img_scroll div").length) scr_pos = 0;
+        if(scr_pos >= $(".img_scroll div").length) scr_pos = $(".img_scroll div").length-1;
         $(".img_scroll div").eq(scr_pos).css("left", "100%").stop().animate({"left":"0%"}, 300);
         $(".indicator").removeClass("current");
         $(".indicator").eq(scr_pos).addClass("current");
     })
 
     $("#prev").click(function(){
+        if(scr_pos == 0) {
+            return;
+        }
         $(".img_scroll div").eq(scr_pos).stop().animate({"left":"100%"}, 300);
         scr_pos--;
-        if(scr_pos < 0) scr_pos = $(".img_scroll div").length-1;
+        if(scr_pos < 0) scr_pos = 0;
+        // $(".img_scroll div").length-1
         $(".img_scroll div").eq(scr_pos).css("left", "-100%").stop().animate({"left":"0%"}, 300);
         $(".indicator").removeClass("current");
         $(".indicator").eq(scr_pos).addClass("current");
@@ -45,7 +52,7 @@ window.onload = $(function() {
             url:url,
             success:function(suggestion) {
                 console.log(suggestion);
-                let page_maxNum = Math.ceil(suggestion.data.length/5);
+                let page_maxNum = Math.ceil(suggestion.data.length/10);
                 $(".suggestion1_total").append(page_maxNum);
                 for(let i=0; i<page_maxNum; i++) {
                     let _tag = "<tbody class='suggestion1_tbody'></tbody>";
@@ -64,7 +71,7 @@ window.onload = $(function() {
                     let mod_date = _modifiedtime.getDate();
                     let format_mod = (`${mod_year}-${mod_month >= 10 ? mod_month : '0' + mod_month}-${mod_date >= 10 ? mod_date : '0' + mod_date}`);
                     
-                    let page = Math.floor(i/5);                  
+                    let page = Math.floor(i/10);                  
                     let rand20_tag = 
                     '<tr>'+
                         '<td>'+category+'</td>'+                    

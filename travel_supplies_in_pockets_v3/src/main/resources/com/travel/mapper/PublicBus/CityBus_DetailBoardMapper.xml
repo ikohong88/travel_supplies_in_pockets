@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.travel.mapper.PublicBus.CityBus_DetailBoardMapper">
+    <insert id="citybus_insert_cityCode">
+        INSERT INTO travel_supplies_in_pockets.public_busctycodelist
+        (citycode, cityname)
+        VALUES(#{citycode}, #{cityname});
+    </insert>
+</mapper>

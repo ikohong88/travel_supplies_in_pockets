@@ -57,6 +57,9 @@ cursor:pointer; user-select: none;}
 .list_area tbody tr:hover {
     background-color: #eee; cursor:pointer; user-select:none;
 }
+.resultBaseBD_tbody {display: none;}
+.resultBaseBD_tbody.active {display: table-row-group;}
+
 .search_area {margin-top: 20px; text-align: center;}
 .search_area > * {display: inline-block; font-size: 0;}
 .search_box {font-size: 0px; vertical-align: middle;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="errorPage"> 
+        <span class="errorHead">Error!</span><br /> 
+        <p th:text="${'path: ' + path}"></p> 
+        <p th:text="${'status: ' + status}"></p> 
+        <p th:text="${'timestamp: ' + timestamp}"></p> 
+        <p th:text="${'error: ' + error}"></p> 
+        <p th:text="${'errors: ' + errors}"></p> 
+        <p th:text="${'exception: ' + exception}"></p> 
+        <p th:text="${'message: ' + message}"></p> 
+        <p th:text="${'trace: ' + trace}"></p>
+     </div>
+</body>
+</html>

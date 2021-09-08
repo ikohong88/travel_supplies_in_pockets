@@ -1,4 +1,6 @@
 $(function(){
+    let currentPage = 1;
+    let page_maxNum = 1;
 
     let local_sido;
     let local_sido_code;
@@ -69,12 +71,16 @@ $(function(){
         local_cat3 = $("#category3").find("option:selected").attr("cat3_name");
     })
 
+    // 조회버튼
     $("#lookup_btn").click(function() {
-        $("#search_remove").remove();
         if(local_sido_code == undefined) {
             alert("시도를 먼저 선택해주세요!");
             return;
         }
+        $("#search_remove").remove();
+        $(".resultBaseBD_total").empty();
+        currentPage = 1;
+        $(".current").html(currentPage);
         if($(".BaseBD_list").length != 0) {
             $(".BaseBD_list").remove();
         }
@@ -203,7 +209,7 @@ $(function(){
             type:"get",
             url:url,
             success:function(BaseDBResult) {
-                console.log(BaseDBResult.baseDB_Result[0]);
+                // console.log(BaseDBResult.baseDB_Result.length);
                 if(BaseDBResult.baseDB_Result.length == 0) {
                     let tag = 
                         '<tr class="BaseBD_list" colspan="5" style="height: 500px; text-align:center;">'+
@@ -212,7 +218,14 @@ $(function(){
                     $("#resultBaseBD_list").append(tag);
                     return;
                 }
+                page_maxNum = Math.ceil(BaseDBResult.baseDB_Result.length/7);
+                $(".resultBaseBD_total").append(page_maxNum);
+                for(let i=0; i<page_maxNum; i++) {
+                    let _tag = "<tbody class='resultBaseBD_tbody'></tbody>";
+                    $("#resultBaseBD_table").append(_tag);
+                }
                 for(let i=0;i<BaseDBResult.baseDB_Result.length;i++) {
+                    let page = Math.floor(i/7); 
                     let addr = BaseDBResult.baseDB_Result[i].areaCodeName+" "+BaseDBResult.baseDB_Result[i].name;
                     let cat = BaseDBResult.baseDB_Result[i].mainCategory+" > "+BaseDBResult.baseDB_Result[i].middleCategory;
                     let tag = 
@@ -231,13 +244,31 @@ $(function(){
                             '<td class="readCnt">'+BaseDBResult.baseDB_Result[i].readcount+'</td>'+
                             '<td class="mod_date">'+BaseDBResult.baseDB_Result[i].format_mod+'</td>'+
                         '</tr>';
-                    $("#resultBaseBD_list").append(tag);
+                    $(".resultBaseBD_tbody").eq(page).append(tag);
                 }
+                $(".resultBaseBD_tbody").eq(0).addClass("active");
+                
                 aTag_clickEvent();
             }
         })
     }
-
+    // 좌우 페이징 버튼
+    $("#next_page").click(function() {
+        currentPage = Number($(".current").html());
+        currentPage++;
+        if(currentPage > page_maxNum) currentPage = page_maxNum;
+        $(".current").html(currentPage);
+        $(".resultBaseBD_tbody").removeClass("active");
+        $(".resultBaseBD_tbody").eq(currentPage-1).addClass("active");
+    })
+    $("#prev_page").click(function() {
+        currentPage = Number($(".current").html());
+        currentPage--;
+        if(currentPage <= 0) currentPage = 1;
+        $(".current").html(currentPage);
+        $(".resultBaseBD_tbody").removeClass("active");
+        $(".resultBaseBD_tbody").eq(currentPage-1).addClass("active");
+    })
     function OPANAPI_DetailCom(ctid,cTypeId) {
         $.ajax({
             type:"get",

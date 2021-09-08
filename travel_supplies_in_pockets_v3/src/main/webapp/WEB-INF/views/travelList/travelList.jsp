@@ -12,7 +12,6 @@
     <script src="/assets/js/travelList/travelList.js"></script>
 </head>
 <body>
-    <h1>여행 리스트 화면</h1>
     <div class="main_area">
         <div class="main_left">
             <div class="select_area">
@@ -48,18 +47,25 @@
                     <label for="view_cnt"><i class="fas fa-check"></i> 조회수 순</label>
                 </div>
                 <div class="pager_area">
-                    <button id="prev_page"><i class="fas fa-chevron-left"></i></button>
-                    <div class="pagers">
+                    <!-- <button id="prev_page"><i class="fas fa-chevron-left"></i></button> -->
+                    <!-- <div class="pagers">
                         <a href="#" class="pager current">1</a>
                         <a href="#" class="pager">2</a>
                         <a href="#" class="pager">3</a>
                         <a href="#" class="pager">4</a>
-                    </div>
-                    <button id="next_page"><i class="fas fa-chevron-right"></i></button>
+                    </div> -->
+
+                    <!-- 클릭 버튼 지역 -->
+                    <div class="resultBaseBD_pager_area">
+                        <button id="prev_page"><i class="fas fa-chevron-left"></i></button>
+                        <span class="current">1</span> / <span class="resultBaseBD_total">1</span>
+                        <button id="next_page"><i class="fas fa-chevron-right"></i></button>
+                    </div> 
+                    <!-- <button id="next_page"><i class="fas fa-chevron-right"></i></button> -->
                 </div>
             </div>
             <div class="list_area">
-                <table>
+                <table id="resultBaseBD_table">
                     <thead>
                         <tr>
                             <th>지역</th>
@@ -69,8 +75,8 @@
                             <th>수정일</th>
                         </tr>
                     </thead>
-                    <tbody id="resultBaseBD_list">
-                        <tr id="search_remove">
+                    <tbody id="search_remove">
+                        <tr>
                             <td colspan="5" style="height: 500px; text-align:center;">
                                 <h1 style="margin-top: 240px; font-size: 30px;">데이터 조회를 먼저 해주세요.</h1>
                             </td>

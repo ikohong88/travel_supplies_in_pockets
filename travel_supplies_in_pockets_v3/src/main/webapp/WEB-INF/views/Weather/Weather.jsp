@@ -13,7 +13,7 @@
 </head>
 <body>
     <main>
-        <h1 id="Weather_region"></h1>
+        <h1 id="Weather_region">조회위치 : </h1>
         <div id="content">
             <div class="weatherTableArea" style="width: 100%;">
                 <h2>하늘상태</h2>
@@ -75,6 +75,21 @@
                     </tr>
                 </table>
             </div>
+            <div class="weatherTableArea" style="width: 100%;">
+                <h2>자외선지수조회</h2>
+                <h3 id="UVIdx_FullDate">데이터날짜 : </h3>
+                <table class="info_table" style="width: 100%;">
+                    <tr id="UVIdxNowHour">
+                        <th>오늘</th>
+                        <th>내일</th>
+                        <th>모레</th>
+                        <th>내일모레</th>   
+                    </tr>
+                    <tr id="UVIdx_Info">
+
+                    </tr>
+                </table>
+            </div>
             <div id="weatherInfo" style="width: 65%;">
                 <h2 id="weather_addr"></h2>
                 
@@ -114,6 +129,14 @@
                     <div id="PCP_Table">
                         <table>
                             <thead>
+                                <th>평균 강수확률</th>
+                            </thead>
+                            <tbody>
+                                <td id="POP_Info"></td>
+                            </tbody>
+                        </table>
+                        <table>
+                            <thead>
                                 <th>강수 예정 시간</th>
                                 <th>강수 예정</th>
                             </thead>
@@ -121,10 +144,6 @@
                             
                             </tbody>
                         </table>
-                    </div>
-                    <div id="POP_TextInfo">
-                        <h2>평균 강수확률</h2>
-                        <h1 id="POP_Info"></h1>
                     </div>
                 </div>               
             </div>

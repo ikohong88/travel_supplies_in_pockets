@@ -16,4 +16,8 @@
     <select id="weather_select_adiffusionindex" resultType="com.travel.vo.Weather.Weather_AdiffusionIndexVO">
         select wa.*, wl.sido, wl.lng, wl.lat, wl.nx, wl.ny from weather_adiffusionindex wa inner join weather_latlng wl on wa.areaNo = wl.code where wl.sido = #{sido} and wa.date = #{date}
     </select>
+
+    <select id="weather_select_UVIdx" resultType="com.travel.vo.Weather.Weather_UVIdxVO">
+        SELECT * FROM weather_uvidx where areaNo = #{areaNo} and `date` = #{date};
+    </select>
 </mapper>
