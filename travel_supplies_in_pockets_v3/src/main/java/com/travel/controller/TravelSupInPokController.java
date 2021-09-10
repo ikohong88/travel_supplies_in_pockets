@@ -35,4 +35,9 @@ public class TravelSupInPokController {
     public String getTravelWeather() {
         return "/Weather/Weather";
     }
+
+    @GetMapping("/travel/transport")
+    public String getTranSport() {
+        return "/transport/transport";
+    }
 }

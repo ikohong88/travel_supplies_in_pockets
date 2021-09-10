@@ -124,6 +124,9 @@ window.onload = $(function() {
     $("#Weather_detail").click(function() {
         location.href = "http://localhost:8090/travel/Weather";
     })
+    $("#train_info_table").click(function() {
+        location.href = "http://localhost:8090/travel/transport";
+    })
 
     // openapi 소개정보 조회
     function introduce_info(contentid, contenttypeid) {

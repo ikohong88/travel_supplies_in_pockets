@@ -87,6 +87,7 @@
                             <p id="detail_text"></p>
                         </div>
                         <div id="transportation">
+                            <button id="Transport_detail">대중교통정보 상세보기</button>
                             <h2 id="Train_Title">기차 정보 : </h2>
                             <table id="train_info_table" class="info_table">
                                 <thead id="train_info_table">
@@ -130,6 +131,7 @@
                             </table>
                         </div>
                         <div id="weatherInfo" hidden="hidden">
+                            <button id="Weather_detail">날씨상세정보 보기</button>
                             <h2 id="weather_addr"></h2>
                             
                             <div class="weatherChartArea">
@@ -194,7 +196,6 @@
                                     </tr>
                                 </table>
                             </div>
-                        <button id="Weather_detail">날씨상세정보 보기</button>
                         </div>
                     </div>
                 </div>

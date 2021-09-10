@@ -1,4 +1,6 @@
 $(function(){
+    // localStorage.setItem("UserSelectInfo",JSON.stringify(r.detailCom_Info));
+    // localStorage.setItem("Select_img",'none');
     let currentPage = 1;
     let page_maxNum = 1;
 

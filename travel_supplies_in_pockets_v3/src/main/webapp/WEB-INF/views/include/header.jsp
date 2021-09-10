@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/travel/transport">
                     <i class="fas fa-home"></i>
                     <span>여행 교통 보기</span>
                 </a>
