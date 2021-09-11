@@ -7,4 +7,8 @@
         (citycode, cityname)
         VALUES(#{citycode}, #{cityname});
     </insert>
+
+    <select id="citybus_select_latlng" resultType="com.travel.vo.PublicBus.CityBus_CityLatLngVO">
+        select nodenm,lat,lng from public_busstts;
+    </select>
 </mapper>

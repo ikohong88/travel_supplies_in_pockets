@@ -14,5 +14,6 @@
 </head>
 <body>
     <button id="reset">주소 리셋하기</button>
+    <button id="downloadCSV">CSV파일 생성</button>
 </body>
 </html>

@@ -1,8 +1,13 @@
 $(function() {
     let Kakao_searchAddress = JSON.parse(localStorage.getItem("Kakao_searchAddr"));
     let Index_info = JSON.parse(localStorage.getItem("index_data"));
+    let KakaoAddr = new Array();
+
     console.log(Index_info);
-    let Kakao = new Array();
+    // kakaosearchAddr()
+    $("#downloadCSV").click(function() {
+        kakaomakeCSV()
+    })
 
     $("#reset").click(function() {
         let conf_reset = confirm("주소를 초기화 하시겠습니까?");
@@ -11,22 +16,24 @@ $(function() {
         }
     })
 
-    if(Index_info.select == "nonselect") {
-        alert("출발지점이 지정되있지 않습니다.\n주소를 검색해주세요.");
-        Kakao_searchAddr();
-    } else if(Kakao_searchAddress == null) {
+    if(Kakao_searchAddress == null) {
         let conf_select = confirm("정확한 검색을 위해 주소를 입력해주시는게 좋습니다.\n주소를 입력하시겠습니까?")
         if(conf_select == true) {
             Kakao_searchAddr();
         } else if(conf_select == false) {
-            index_addr = Index_info.sido + " " + Index_info.gubun;
-            KakaoSearchLatLng(index_addr);
+            if(Index_info.select == "nonselect") {
+                alert("출발지점이 지정되있지 않습니다.\n주소를 검색해주세요.");
+                Kakao_searchAddr();
+            } else {
+                index_addr = Index_info.sido + " " + Index_info.gubun;
+                KakaoSearchLatLng(index_addr);
+            }
         }
     } else {
         console.log(Kakao_searchAddress);
         KakaoSearchLatLng(Kakao_searchAddress.address);
-    }
-    
+    } 
+    // 주소 검색 api
     function Kakao_searchAddr() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -37,9 +44,71 @@ $(function() {
             }
         }).open();
     }
-    
+    // kakao lat, lng에 따르는 주소조회
+    function kakaosearchAddr() {
+        var center = new kakao.maps.LatLng(37.566826, 126.9786567);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        var geocoder = new kakao.maps.services.Geocoder();
+
+        // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+        searchAddrFromCoords(center, CenterInfo);
+        searchDetailAddrFromCoords(center, CenterInfo);
+
+        function searchAddrFromCoords(coords, callback) {
+            // 좌표로 행정동 주소 정보를 요청합니다
+            geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+        }
+        
+        function searchDetailAddrFromCoords(coords, callback) {
+            // 좌표로 법정동 상세 주소 정보를 요청합니다
+            geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+        }
+        
+        // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+        function CenterInfo(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                for(var i = 0; i < result.length; i++) {
+                    // 행정동의 region_type 값은 'H' 이므로
+                    if (result[i].region_type === 'H') {
+                        let data = {
+                            address:result[i].address_name,
+                            addr1:result[i].region_1depth_name,
+                            addr2:result[i].region_2depth_name,
+                            addr3:result[i].region_3depth_name
+                        }
+                        KakaoAddr.push(data);
+                        console.log(result[i]);
+                        break;
+                    }
+                }
+            }    
+        }
+        downloadCSV()
+    }
+
+    function downloadCSV(ResultAddr){
+        console.log("파일 생성 시작")
+        // console.log(KakaoAddr);
+		var a = "";
+		$.each(ResultAddr, function(i, item){
+			a += item.nodenm + "," + item.addr1 + "," + item.addr2 + "," + item.addr3 + "\r\n";
+		});
+
+		var downloadLink = document.createElement("a");
+		var blob = new Blob([a], { type: "text/csv;charset=utf-8" });
+		var url = URL.createObjectURL(blob);
+		downloadLink.href = url;
+		downloadLink.download = "data.csv";
+
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+		document.body.removeChild(downloadLink);
+        console.log("파일 생성 종료")
+	}
+
+    // Kakao 주소에 따르는 lat,lng 조회
     function KakaoSearchLatLng(addr) {
-        console.log(addr);
         var geocoder = new kakao.maps.services.Geocoder();
         var coords;
         // 주소로 좌표를 검색합니다
@@ -47,7 +116,7 @@ $(function() {
         // 정상적으로 검색이 완료됐으면 
             if (status === kakao.maps.services.Status.OK) {
                 coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                console.log(coords);
+                // console.log(coords);
             };
         });
     }
@@ -346,4 +415,69 @@ $(function() {
         }
         Check_NearTrainStts(New_start_Trainstts);
     }
+
+    // function kakaomakeCSV() {
+    //     $.ajax({
+    //         type:"get",
+    //         url:"/api/citybus/selectlatlng",
+    //         success:function(r) {
+    //             // console.log(r.data[0]);
+    //             console.log("작업 시작----------------------");
+    //             for(let i = 0; i<r.data.length; i++) {                
+    //                 var center = new kakao.maps.LatLng(r.data[i].lat, r.data[i].lng);
+
+    //                 // 주소-좌표 변환 객체를 생성합니다
+    //                 var geocoder = new kakao.maps.services.Geocoder();
+            
+    //                 // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+    //                 searchAddrFromCoords(center, CenterInfo);
+    //                 // searchDetailAddrFromCoords(center, CenterInfo);
+            
+    //                 function searchAddrFromCoords(coords, callback) {
+    //                     // 좌표로 행정동 주소 정보를 요청합니다
+    //                     geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+    //                 }
+                    
+    //                 // function searchDetailAddrFromCoords(coords, callback) {
+    //                 //     // 좌표로 법정동 상세 주소 정보를 요청합니다
+    //                 //     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+    //                 // }
+                    
+    //                 // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+    //                 function CenterInfo(result, status) {
+    //                     if (status === kakao.maps.services.Status.OK) {
+    //                         // 여기가 실행되기 전에
+    //                         for(var j = 0; j < result.length; j++) {
+    //                             // 행정동의 region_type 값은 'H' 이므로
+    //                             if (result[j].region_type === 'H') {
+    //                                 let data = {
+    //                                     nodenm:r.data[i].nodenm,
+    //                                     address:result[j].address_name,
+    //                                     addr1:result[j].region_1depth_name,
+    //                                     addr2:result[j].region_2depth_name,
+    //                                     addr3:result[j].region_3depth_name
+    //                                 }
+    //                                 // 배열에 데이터값 삽입
+    //                                 KakaoAddr.push(data);
+    //                                 break;
+    //                             }
+    //                         }
+    //                     }
+    //                     // 이쪽이 카카오 API를 통한 주소 알아내기의
+    //                     // 콜백 함수이기 때문에, 
+    //                     // 보니까 이게 콜백 실행될 때 마다 데이터가 1개씩 추가되는거 같은데요
+    //                     // 하나의 lat,lng에 따르는 하나의 데이터만 추가가되는데 지금 약 15만개를 조회후
+    //                     // csv파일로 추출을 해서 mysql에 추가를 할 예정입니다;;;
+    //                     // 그럼 작업 감시 스레드를 하나 돌리셔서 완료시점을 봐야겠네요
+    //                     if(i == (r.data.length-1)) {
+    //                         console.log("작업완료! csv파일 생성");
+    //                         downloadCSV(KakaoAddr);
+    //                     }
+    //                 }               
+    //             // 이쪽이 먼저 실행되네요
+    //             // 이 시점에서는 추가가 완료 안되어있을 가능성이 매우 높죠
+    //             }        
+    //         }
+    //     })
+    // }
 })

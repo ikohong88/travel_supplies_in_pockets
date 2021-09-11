@@ -1,6 +1,7 @@
 package com.travel.api.PublicBus;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -9,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import com.travel.api.ServiceKey;
 import com.travel.service.PublicBus.CityBus_DetailBoardService;
 import com.travel.vo.PublicBus.CityBus_CityCodeVO;
+import com.travel.vo.PublicBus.CityBus_CityLatLngVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +22,7 @@ import org.w3c.dom.NodeList;
 
 @RestController
 public class CityBus_DetailBoardAPIController extends ServiceKey {
-    @Autowired CityBus_DetailBoardService serivce;
-    
-    
-
-    
+    @Autowired CityBus_DetailBoardService serivce;  
     // 버스노선 도시코드 저장
     @GetMapping("/openapi/citybus/insertcityCode")
     public Map<String,Object> putInsertCityCode() throws Exception {
@@ -52,6 +50,17 @@ public class CityBus_DetailBoardAPIController extends ServiceKey {
             serivce.citybus_insert_cityCode(vo);
         }
         resultMap.put("status", true);
+        return resultMap;
+    }
+
+    // 버스 정류장 정보 조회 및 CSV파일 생성
+    @GetMapping("/api/citybus/selectlatlng")
+    public Map<String,Object> getSelectLatLng() {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+
+        List<CityBus_CityLatLngVO> list = serivce.citybus_select_latlng();
+
+        resultMap.put("data", list);
         return resultMap;
     }
 }
